@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.scss" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="wrapper">
+        <h2 class="header">Registration</h2>
+        <p class="desc">Register with email or mobile number</p>
+        <section class="form">
+          <div class="form__tabs">
+            <div
+              class="form__tab form__tab--active js-formTab"
+              data-tab-name="mobile"
+            >
+              <span class="form__tab-name">Mobile</span>
+            </div>
+            <div class="form__tab js-formTab" data-tab-name="email">
+              <span class="form__tab-name">Email</span>
+            </div>
+          </div>
+          <form action="#" class="form__main">
+            <div
+              class="form__fieldset form__option-fieldset--active form__option-fieldset js-mobileView js-inputViews"
+            >
+              <label class="form__label form__label--block"
+                >Mobile number</label
+              >
+              <input type="number" class="form__input" />
+            </div>
+            <div
+              class="form__fieldset form__fieldset--email form__option-fieldset js-emailView js-inputViews"
+            >
+              <label class="form__label form__label--block"
+                >Email address</label
+              >
+              <input type="email" class="form__input js-formFormEmail" />
+            </div>
+            <label class="form__label form__label--block"
+              >Select Currency</label
+            >
+            <fieldset class="form__fieldset form__fieldset--currency">
+              <label class="form__label" for="usd">USD</label>
+              <input type="radio" id="usd" name="currency" value="USD" />
+              <label class="form__label" for="eur">EUR</label>
+              <input type="radio" id="eur" name="currency" value="EUR" />
+            </fieldset>
+            <div class="form__fieldset">
+              <label class="form__label" for="terms"
+                >I accept Terms and Conditions</label
+              >
+              <input type="checkbox" id="terms" name="terms" />
+            </div>
+            <div class="form__fieldset">
+              <label class="form__label" for="promo"
+                >I want to get mails about promotions</label
+              >
+              <input type="checkbox" id="promo" name="terms" />
+            </div>
+            <button class="button">Submit</button>
+          </form>
+        </section>
+      </div>
+    </div>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
