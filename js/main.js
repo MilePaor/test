@@ -1,6 +1,23 @@
+let validate = require("validate.js");
+
+constraints = {
+  from: {
+    email: true,
+  },
+};
+
 let DOM = {
   tabs: document.querySelectorAll(".js-formTab"),
   inputViews: document.querySelectorAll(".js-inputViews"),
+  mobileNumberInput: document.querySelector(".js-mobileNumberValue"),
+  emailInput: document.querySelector(".js-emailValue"),
+  currencyCheckbox: document.querySelector('input[name="currency"]:checked'),
+  termsAndConditionsCheckbox: document.querySelector(
+    'input[name="terms"]:checked'
+  ),
+  promotionsCheckbox: document.querySelector('input[name="promotion"]:checked'),
+  submitButton: document.querySelector(".js-submitForm"),
+  form: document.querySelector(".js-registrationForm"),
 };
 
 function toggleElements(allElements, selectedElement, className) {
@@ -23,4 +40,9 @@ DOM.tabs.forEach((tabs) => {
       "form__option-fieldset--active"
     );
   });
+});
+
+DOM.submitButton.addEventListener("click", function () {
+  let isEmailValid = validate({ from: DOM.emailInput.value }, constraints);
+  // let isMobileNumberValid =
 });

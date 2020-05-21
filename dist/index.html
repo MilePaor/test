@@ -21,14 +21,14 @@
               <span class="form__tab-name">Email</span>
             </div>
           </div>
-          <form action="#" class="form__main">
+          <form action="#" class="form__main js-registrationForm">
             <div class="form__fieldset form__option-fieldset--active form__option-fieldset js-mobileView js-inputViews">
               <label class="form__label form__label--block">Mobile number</label>
-              <input type="number" class="form__input">
+              <input type="number" class="form__input js-mobileNumberValue">
             </div>
-            <div class="form__fieldset form__fieldset--email form__option-fieldset js-emailView js-inputViews">
+            <div class="form__fieldset form__option-fieldset js-emailView js-inputViews">
               <label class="form__label form__label--block">Email address</label>
-              <input type="email" class="form__input js-formFormEmail">
+              <input type="text" class="form__input js-emailValue">
             </div>
             <label class="form__label form__label--block">Select Currency</label>
             <fieldset class="form__fieldset form__fieldset--currency">
@@ -43,9 +43,9 @@
             </div>
             <div class="form__fieldset">
               <label class="form__label" for="promo">I want to get mails about promotions</label>
-              <input type="checkbox" id="promo" name="terms">
+              <input type="checkbox" id="promo" name="promotion">
             </div>
-            <button class="button">Submit</button>
+            <button class="button js-submitForm">Submit</button>
           </form>
         </section>
       </div>
