@@ -1373,47 +1373,207 @@ var define;
         typeof module !== 'undefined' ? /* istanbul ignore next */ module : null,
         typeof define !== 'undefined' ? /* istanbul ignore next */ define : null);
 
-},{}],"js/main.js":[function(require,module,exports) {
+},{}],"js/utilities/validators.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.emailValidator = emailValidator;
+exports.phoneNumberValidator = phoneNumberValidator;
+
 var validate = require("validate.js");
 
-constraints = {
+var emailConstraints = {
   from: {
     email: true
   }
 };
-var DOM = {
-  tabs: document.querySelectorAll(".js-formTab"),
-  inputViews: document.querySelectorAll(".js-inputViews"),
-  mobileNumberInput: document.querySelector(".js-mobileNumberValue"),
-  emailInput: document.querySelector(".js-emailValue"),
-  currencyCheckbox: document.querySelector('input[name="currency"]:checked'),
-  termsAndConditionsCheckbox: document.querySelector('input[name="terms"]:checked'),
-  promotionsCheckbox: document.querySelector('input[name="promotion"]:checked'),
-  submitButton: document.querySelector(".js-submitForm"),
-  form: document.querySelector(".js-registrationForm")
+/**
+ * Validate email address
+ * @param {string} value - Entered email address
+ */
+
+function emailValidator(value) {
+  var validated = validate({
+    from: value
+  }, emailConstraints);
+
+  if (validated === undefined) {
+    return true;
+  }
+
+  return false;
+}
+/**
+ * Check for valid length of phone number
+ * @param {string} number Entered phone number
+ */
+
+
+function phoneNumberValidator(number) {
+  if (number.length > 6 && number.length < 12) {
+    return true;
+  }
+
+  return false;
+}
+},{"validate.js":"node_modules/validate.js/validate.js"}],"js/utilities/appendErrorMessage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/**
+ *
+ * @param {node} reference Node that error should be attached at
+ * @param {string} message Test on error message
+ */
+var appendElementAfter = function appendElementAfter(reference, message) {
+  var errorElement = document.createElement("SPAN");
+  errorElement.innerText = message;
+  errorElement.classList.add("error-message");
+  reference.parentNode.insertBefore(errorElement, reference.nextSibling);
 };
 
-function toggleElements(allElements, selectedElement, className) {
-  allElements.forEach(function (element) {
-    element.classList.remove(className);
-  });
-  selectedElement.classList.add(className);
-}
+var _default = appendElementAfter;
+exports.default = _default;
+},{}],"js/main.js":[function(require,module,exports) {
+"use strict";
 
-DOM.tabs.forEach(function (tabs) {
-  tabs.addEventListener("click", function (e) {
-    var activeTab = this.getAttribute("data-tab-name");
-    var selectedInputView = document.querySelector(".js-".concat(activeTab, "View"));
-    toggleElements(DOM.tabs, tabs, "form__tab--active");
-    toggleElements(DOM.inputViews, selectedInputView, "form__option-fieldset--active");
+var _validators = require("./utilities/validators");
+
+var _appendErrorMessage = _interopRequireDefault(require("./utilities/appendErrorMessage"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+(function () {
+  var activeView = "mobile"; // newNode;
+
+  var DOM = {
+    tabs: document.querySelectorAll(".js-formTab"),
+    inputViews: document.querySelectorAll(".js-inputViews"),
+    mobileInput: document.querySelector(".js-mobileNumberValue"),
+    emailInput: document.querySelector(".js-emailValue"),
+    currencyCheckbox: document.querySelectorAll('input[name="currency"]'),
+    termsAndConditionsCheckbox: document.querySelector('input[name="terms"]'),
+    promotionsCheckbox: document.querySelector('input[name="promotion"]'),
+    submitButton: document.querySelector(".js-submitForm"),
+    form: document.querySelector(".js-registrationForm"),
+    termsContainer: document.querySelector(".js-termsContainer")
+  };
+
+  function toggleElements(allElements, selectedElement, className) {
+    allElements.forEach(function (element) {
+      element.classList.remove(className);
+    });
+    selectedElement.classList.add(className);
+  }
+
+  DOM.tabs.forEach(function (tab) {
+    tab.addEventListener("click", function (e) {
+      activeView = this.getAttribute("data-tab-name");
+      var selectedInputView = document.querySelector(".js-".concat(activeView, "View"));
+      toggleElements(DOM.tabs, tab, "form__tab--active");
+      toggleElements(DOM.inputViews, selectedInputView, "form__option-fieldset--active");
+    });
   });
-});
-DOM.submitButton.addEventListener("click", function () {
-  var isEmailValid = validate({
-    from: DOM.emailInput.value
-  }, constraints); // let isMobileNumberValid =
-});
-},{"validate.js":"node_modules/validate.js/validate.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+  var sendDataToServer = function sendDataToServer(data) {
+    console.log(data);
+  };
+
+  var removeOldErrors = function removeOldErrors() {
+    var oldErrors = document.querySelectorAll(".error-message");
+
+    if (oldErrors) {
+      oldErrors.forEach(function (element) {
+        element.remove();
+      });
+    }
+  };
+
+  DOM.submitButton.addEventListener("click", function (e) {
+    var isEmailValid = (0, _validators.emailValidator)(DOM.emailInput.value);
+    var isMobileNumberValid = (0, _validators.phoneNumberValidator)(DOM.mobileInput.value);
+    var isTermsAccepted = DOM.termsAndConditionsCheckbox.checked;
+    var isPromotionChecked = DOM.promotionsCheckbox.checked;
+    var selectedCurrency;
+    removeOldErrors();
+
+    var errorMessage = function errorMessage(errorType) {
+      switch (errorType) {
+        case "email":
+          (0, _appendErrorMessage.default)(DOM.emailInput, "Email is not valid");
+          break;
+
+        case "phone":
+          (0, _appendErrorMessage.default)(DOM.mobileInput, "Mobile phone is not valid");
+          break;
+
+        case "terms":
+          (0, _appendErrorMessage.default)(DOM.termsContainer, "You must agree with terms and conditions");
+          break;
+      }
+    };
+
+    DOM.currencyCheckbox.forEach(function (_ref) {
+      var checked = _ref.checked,
+          value = _ref.value;
+
+      if (checked) {
+        selectedCurrency = value;
+      }
+    });
+
+    if (activeView === "mobile") {
+      if (!isMobileNumberValid) {
+        errorMessage("phone");
+      }
+
+      if (!isTermsAccepted) {
+        errorMessage("terms");
+      }
+
+      if (isMobileNumberValid && isTermsAccepted) {
+        sendDataToServer(_defineProperty({
+          currency: selectedCurrency,
+          promotion: isPromotionChecked
+        }, activeView, DOM["".concat(activeView, "Input")].value));
+        return true;
+      } else {
+        e.preventDefault();
+        return false;
+      }
+    }
+
+    if (activeView === "email") {
+      if (!isEmailValid) {
+        errorMessage("email");
+      }
+
+      if (!isTermsAccepted) {
+        errorMessage("terms");
+      }
+
+      if (isEmailValid && isTermsAccepted) {
+        sendDataToServer(_defineProperty({
+          currency: selectedCurrency,
+          promotion: isPromotionChecked
+        }, activeView, DOM["".concat(activeView, "Input")].value));
+        return true;
+      } else {
+        e.preventDefault();
+        return false;
+      }
+    }
+  });
+})();
+},{"./utilities/validators":"js/utilities/validators.js","./utilities/appendErrorMessage":"js/utilities/appendErrorMessage.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1441,7 +1601,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43641" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44273" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

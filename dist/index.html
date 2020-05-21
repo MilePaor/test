@@ -28,16 +28,16 @@
             </div>
             <div class="form__fieldset form__option-fieldset js-emailView js-inputViews">
               <label class="form__label form__label--block">Email address</label>
-              <input type="text" class="form__input js-emailValue">
+              <input type="email" class="form__input js-emailValue">
             </div>
             <label class="form__label form__label--block">Select Currency</label>
             <fieldset class="form__fieldset form__fieldset--currency">
               <label class="form__label" for="usd">USD</label>
-              <input type="radio" id="usd" name="currency" value="USD">
+              <input type="radio" id="usd" name="currency" value="USD" checked="">
               <label class="form__label" for="eur">EUR</label>
               <input type="radio" id="eur" name="currency" value="EUR">
             </fieldset>
-            <div class="form__fieldset">
+            <div class="form__fieldset js-termsContainer">
               <label class="form__label" for="terms">I accept Terms and Conditions</label>
               <input type="checkbox" id="terms" name="terms">
             </div>
