@@ -1,4 +1,6 @@
 # test
 
-Project is made with Parcel.js
+Project is bundled with Parcel.js
+
+
 
