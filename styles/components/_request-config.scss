@@ -1,0 +1,16 @@
+.request-config {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  background-color: $white;
+  opacity: 0.3;
+  transition: all 300ms ease;
+  padding: 16px;
+  border: 1px solid $black;
+  text-align: center;
+  cursor: pointer;
+  max-width: 300px;
+  &:hover {
+    opacity: 1;
+  }
+}

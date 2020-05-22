@@ -14,8 +14,10 @@
     <div class="page">
       <div class="wrapper">
         <h2 class="header">Registration</h2>
-        <p class="desc">Register with email or mobile number</p>
-        <section class="form">
+        <p class="desc js-formDescription">
+          Register with email or mobile number
+        </p>
+        <section class="form js-formBox">
           <div class="form__tabs">
             <div
               class="form__tab form__tab--active js-formTab"
@@ -75,6 +77,19 @@
           </form>
         </section>
       </div>
+    </div>
+    <div class="loader js-loader"></div>
+    <div class="request-config">
+      <p class="request-config__desc">
+        Checkbox regulates should fake api request be successful or not
+      </p>
+      <label for="request-config">Should request by successful</label>
+      <input
+        type="checkbox"
+        id="request-config"
+        class="request-config__checkbox js-requestConfigCheckbox"
+        checked
+      />
     </div>
     <script src="./js/main.js"></script>
   </body>

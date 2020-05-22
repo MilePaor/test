@@ -61,4 +61,43 @@
 }
 .error-message {
   color: red;
+  display: block;
+}
+.form-msg {
+  padding: 32px;
+  background: $white;
+  font-size: 32px;
+  text-align: center;
+  &--success {
+    color: $black;
+  }
+  &--error {
+    color: red;
+  }
+}
+.loader {
+  border: 16px solid $blue;
+  border-radius: 50%;
+  border-top: 16px solid $white;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  top: calc(50% - 60px);
+  left: calc(50% - 60px);
+  transform: translate(-50%, -50%);
+}
+.js-loader {
+  display: none;
+  &--active {
+    display: block;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
