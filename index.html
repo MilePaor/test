@@ -29,9 +29,9 @@
               <span class="form__tab-name">Email</span>
             </div>
           </div>
-          <form action="#" class="form__main js-registrationForm">
+          <form class="form__main js-registrationForm" onsubmit="return false;">
             <div
-              class="form__fieldset form__option-fieldset--active form__option-fieldset js-mobileView js-inputViews"
+              class="form__field form__option-fieldset--active form__option-fieldset js-mobileView js-inputViews"
             >
               <label class="form__label form__label--block"
                 >Mobile number</label
@@ -39,7 +39,7 @@
               <input type="number" class="form__input js-mobileNumberValue" />
             </div>
             <div
-              class="form__fieldset form__option-fieldset js-emailView js-inputViews"
+              class="form__field form__option-fieldset js-emailView js-inputViews"
             >
               <label class="form__label form__label--block"
                 >Email address</label
@@ -61,13 +61,13 @@
               <label class="form__label" for="eur">EUR</label>
               <input type="radio" id="eur" name="currency" value="EUR" />
             </fieldset>
-            <div class="form__fieldset js-termsContainer">
+            <div class="form__field js-termsContainer">
               <label class="form__label" for="terms"
                 >I accept Terms and Conditions</label
               >
               <input type="checkbox" id="terms" name="terms" />
             </div>
-            <div class="form__fieldset">
+            <div class="form__field">
               <label class="form__label" for="promo"
                 >I want to get mails about promotions</label
               >

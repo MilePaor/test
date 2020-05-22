@@ -11,7 +11,8 @@
     padding: 4px;
     box-sizing: border-box;
   }
-  &__fieldset {
+  &__fieldset,
+  &__field {
     margin-bottom: 8px;
   }
   &__option-fieldset {

@@ -198,6 +198,9 @@ function registrationForm() {
         return false;
       }
     }
+
+    e.preventDefault();
+    // return true;
   });
 }
 
